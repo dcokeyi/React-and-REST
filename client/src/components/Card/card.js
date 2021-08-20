@@ -7,7 +7,8 @@ class Card extends Component {
     this.state = {
       residents: [],
       programs: [],
-      residentNames: []
+      residentNames: [],
+      actives: []
     }
   }
 
@@ -31,7 +32,7 @@ class Card extends Component {
       user.forEach(e => {
 
         e.attendance.forEach(a => {
-          innerIds.push(a.residentId)
+          innerIds.push([a.residentId, a.status])
         });
 
         ids.push(innerIds);
@@ -42,19 +43,22 @@ class Card extends Component {
       let names = []
       let innerNames = []
 
+
       ids.forEach(inId => {
         inId.forEach(id => {
           for (let index = 0; index < this.state.residents.length; index++) {
-            if (id === this.state.residents[index].id) {
-              innerNames.push(this.state.residents[index].name);
+            if (id[0] === this.state.residents[index].id) {
+              innerNames.push("Name: "+ this.state.residents[index].name + " | Status: " + id[1]);
+  
               break;
             }
           }
         });
         names.push(innerNames);
+        
         innerNames = []
-      });
 
+      });
       this.setState({ programs: user })
       this.setState({ residentNames: names })
 
@@ -69,34 +73,64 @@ class Card extends Component {
 
 
   render() {
+    const {  residentNames,  programs } = this.state
+
     
+    const tables = []
+    let rows = []
+    
+    for (let index = 0; index < residentNames.length; index++) {
+    
+
+      for (let j = 0; j < residentNames[index].length; j++) {
+        
+        rows.push(
+        <tr>
+          <td>
+            <p>{residentNames[index][j]}</p>
+          </td>
+        </tr>
+        )
+      }
+
+      tables.push(
+        <thead className="bg-gray-50">
+        <tr>
+          <th 
+            scope="col"
+            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            {programs[index].name}
+          </th>
+        </tr>
+        <tbody>
+                {rows}
+        </tbody>
+
+
+      </thead>
+      )
+
+      rows =[]
+
+     
+      
+      
+    }
+
+
+
     return (
-      <div>
-        {this.state.programs.map(n => (
-          <table key={n.name}>
-            <thead>
-              <tr>
-                <th>
-                  {n.name}
-                </th>
-              </tr>
-            </thead>
-            {n.attendance.map((item, i) => (
+      <div className="flex flex-col m-10 p-10">
+        <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+            <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+              <table className="min-w-full divide-y divide-gray-200 ">
+                {tables}
+              </table>
 
-              <tbody key={i}>
-                <tr>
-                  <td>
-                    <p>Name:{item.residentId}</p>
-                    <p>Status:{item.status}</p>
-                  </td>
-                </tr>
-              </tbody>
-            ))}
-
-          </table>
-        ))}
-
-
+            </div>
+          </div>
+        </div>
       </div>
     )
 

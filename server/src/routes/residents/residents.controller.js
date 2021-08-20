@@ -1,26 +1,36 @@
 const fetch = require('node-fetch');
+const superagent = require('superagent');
 
-const URL = 'https://welbi.org/api/residents?token=3a20059a-c92f-4d00-a204-28b4508f16d5';
+const URL = 'https://welbi.org/api/residents';
 
 function httpGetResidents(req,res) {
-    fetch(`${URL}`)
-    .then(res => res.json())
-    .then(data => res.json(data))
-    .catch(err => console.log("error"))
+    superagent.get(`${URL}`)
+    .query({token: "3a20059a-c92f-4d00-a204-28b4508f16d5"})
+    .end(function(err, response){
+        if(err){
+            console.log(err)
+        }else{
+            return res.json(response.body);
+        }
+    })
 };
 
-// fetch(`${URL}`)
-//     .then(res => res.json())
-//     .then(data =>console.log(data))
-//     .catch(err => console.log("error"))
+async function httpPostResidents(req,res) {
+    const response = await superagent.post(`${URL}`)
+        .send(req.body) // sends a JSON post body
+        .query({token: "3a20059a-c92f-4d00-a204-28b4508f16d5"})
+        .set('Content-Type', 'application/json')
+        .set('accept', 'json');
 
-
-
+        console.log(response.body);
+        return res.json(response.body);
+}
 
 
 
 module.exports = {
-    httpGetResidents
+    httpGetResidents,
+    httpPostResidents,
 };
 
 
