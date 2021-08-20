@@ -1,0 +1,26 @@
+{
+  "name": "rest-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server":"npm run watch --prefix server",
+    "client": "npm start --prefix client",
+    "watch": "concurrently \"npm run server\" \"npm run client\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dcokeyi/React-and-REST.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dcokeyi/React-and-REST/issues"
+  },
+  "homepage": "https://github.com/dcokeyi/React-and-REST#readme",
+  "dependencies": {
+    "concurrently": "^6.2.1",
+    "morgan": "^1.10.0"
+  }
+}
