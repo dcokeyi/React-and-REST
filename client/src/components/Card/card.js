@@ -86,7 +86,7 @@ class Card extends Component {
         
         rows.push(
         <tr>
-          <td>
+          <td className="px-6 py-4 whitespace-nowrap">
             <p>{residentNames[index][j]}</p>
           </td>
         </tr>
@@ -95,10 +95,10 @@ class Card extends Component {
 
       tables.push(
         <thead className="bg-gray-50">
-        <tr>
+        <tr className="border-2">
           <th 
             scope="col"
-            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider bg-gray-50">
             {programs[index].name}
           </th>
         </tr>
