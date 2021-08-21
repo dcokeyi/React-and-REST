@@ -5,7 +5,8 @@ This the purpose of this project was to build out of a backend using Node JS to 
 ---
 
 # Modules need to run the React app (Front end) project on your local machine
-# cd into client Folder
+cd into client Folder
+
 Instialise NPM 
 
 ### `npm init`
@@ -26,7 +27,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ---
 # Modules needed to run the Node server project on your local machine. 
-# cd into Server Folder
+cd into Server Folder
+
 Instialise NPM 
 
 ### `npm init`
@@ -75,7 +77,8 @@ To test test endpoint run
 Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
 ---
 ## To Run both Frontend and Backend concurently
-# cd into main Folder
+
+cd into main Folder
 
 Instialise NPM 
 
